@@ -14,16 +14,18 @@ public class ClientSumEntity {
     private int id;
 
     @PastOrPresent
+    @Temporal(TemporalType.DATE)
     private Date date;
 
     @Min(0)
     private double sum;
-
-    private String currency;
+    @OneToOne
+    @JoinColumn(name = "currencyId", referencedColumnName = "id")
+    private CurrencyEntity currency;
 
     public ClientSumEntity() { }
 
-    public ClientSumEntity(Date date, double sum, String currency) {
+    public ClientSumEntity(Date date, double sum, CurrencyEntity currency) {
         this.date = date;
         this.sum = sum;
         this.currency = currency;
@@ -53,7 +55,7 @@ public class ClientSumEntity {
         this.sum = sum;
     }
 
-    public String getCurrency() {
+    public CurrencyEntity getCurrency() {
         return currency;
     }
 }
